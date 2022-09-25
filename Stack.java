@@ -30,19 +30,12 @@ public class Stack<T> {
      * @param data data of node
      * @throws NullPointerException if head doesn't exist
      */
-    public void push(T data)throws Exception{
-        try {
-            if(top==null){
-                throw new NullPointerException("No top found");
-            }
+    public void push(T data){
             Node new_node=new Node(data);
             Node temp=top;
             new_node.below=temp;
             top=new_node;
             size++;
-        } catch (NullPointerException e) {
-            throw e;
-        }
     }
     /**
      * 
@@ -53,7 +46,7 @@ public class Stack<T> {
         T data=null;
         try {
             if(top==null){
-                throw new NullPointerException("No top found");
+                throw new NullPointerException("Underflows");
             }
             data=top.data;
             Node node=top.below;
@@ -73,7 +66,7 @@ public class Stack<T> {
         T data=null;
         try {
             if(top==null){
-                throw new NullPointerException("No top found");
+                throw new NullPointerException("Underflows");
             }
             data=top.data;
         } catch (NullPointerException e) {
@@ -94,7 +87,7 @@ public class Stack<T> {
         try {
             node=top;
             if(top==null){
-                throw new NullPointerException("No top found");
+                throw new NullPointerException("Underflows");
             }
             for(index=0;index<size;index++){
                 if(node.data==data){
