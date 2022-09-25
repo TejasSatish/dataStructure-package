@@ -29,21 +29,13 @@ public class LinkedList<T> {
     /**
      * 
      * @param data data of node
-     * @throws NullPointerException if head doesn't exist
      */
-    public void insertAtHead(T data)throws Exception{
-        try{
-            if(head==null){
-                throw new NullPointerException("No head found");
-            }
+    public void insertAtHead(T data){
             Node new_node=new Node(data);
             Node temp=head;
             new_node.next=temp;
             head=new_node;
             size++;
-        }catch(NullPointerException e){
-            throw e;
-        }
     }
     
     /**
@@ -55,11 +47,12 @@ public class LinkedList<T> {
      */
     public void insertAtIndex(int index,T data)throws Exception{
         try {
-            if(head==null){
-                throw new NullPointerException("No head found");
-            }
             if(index>=size || index<0){
-                throw new ArrayIndexOutOfBoundsException("Index doesn't exist");
+                if(index==0 && size==0){
+                    
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Index doesn't exist");
+                }
             }
             if(index==0){
                 insertAtHead(data);
@@ -88,13 +81,8 @@ public class LinkedList<T> {
      /**
       * 
       * @param data data of node
-      * @throws NullPointerException if head doesn't exist
       */
     public void insertAtTail(T data)throws Exception{
-        try {
-            if(head==null){
-                throw new NullPointerException("No head found");
-            }
             Node new_node=new Node(data);
             Node temp=head;            
             while(temp.next!=null){
@@ -102,9 +90,6 @@ public class LinkedList<T> {
             }
             temp.next=new_node;
             size++;
-        } catch (NullPointerException e) {
-            throw e;
-        }
     }
     
     /**
@@ -116,7 +101,7 @@ public class LinkedList<T> {
     public void delete(int index)throws Exception{
         try{
             if(head==null){
-                throw new NullPointerException("No head found");
+                throw new NullPointerException("Underflows");
             }
             if(index>=size || index<0){
                 throw new ArrayIndexOutOfBoundsException("Index doesn't exist");
@@ -185,7 +170,7 @@ public class LinkedList<T> {
         int index=0;
         try{
             if(head==null){
-                throw new NullPointerException("No head found");
+                throw new NullPointerException("Underflows");
             }
             if(index>=size || index<0){
                 throw new ArrayIndexOutOfBoundsException("Index doesn't exist");
@@ -218,7 +203,7 @@ public class LinkedList<T> {
     public int size()throws Exception{
         try {
             if(head==null){
-                throw new NullPointerException("No head found");
+                throw new NullPointerException("Underflows");
             }
         } catch (NullPointerException e) {
             throw e;
