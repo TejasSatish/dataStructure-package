@@ -1,6 +1,14 @@
 package dataStructure;
+
+/**
+ * 
+ * @author Tejas Satish
+ * 
+ */
+import java.util.NoSuchElementException;
+
 public class Stack<T> {
-    class Node {
+    class Node {// inner class node
         T data;
         Node below=null;
         public Node(T data){
@@ -9,13 +17,19 @@ public class Stack<T> {
     }
     private Node top=null;
     private int size;
-
+    /**
+     * 
+     * @param data data of top node
+     */
     public Stack(T data){
         top=new Node(data);
         size++;
     }
-
-
+    /**
+     * 
+     * @param data data of node
+     * @throws NullPointerException if head doesn't exist
+     */
     public void push(T data)throws Exception{
         try {
             if(top==null){
@@ -30,7 +44,11 @@ public class Stack<T> {
             throw e;
         }
     }
-
+    /**
+     * 
+     * @return returns data of popped node
+     * @throws NullPointerException if head doesn't exist
+     */
     public T pop()throws Exception{
         T data=null;
         try {
@@ -46,7 +64,11 @@ public class Stack<T> {
         }
         return data;
     }
-
+    /**
+     * 
+     * @return data of top node
+     * @throws NullPointerException if head doesn't exist
+     */
     public T peek()throws Exception{
         T data=null;
         try {
@@ -59,7 +81,13 @@ public class Stack<T> {
         }
         return data;
     }
-
+    /**
+     * 
+     * @param data data element to be searched
+     * @return index of node with data
+     * @throws NullPointerException if head doesn't exist
+     * @throws NoSuchElementException if specified data element doesn't exist in stack
+     */
     public int getIndexOf(T data)throws Exception{
         int index=0;
         Node node=null;
@@ -73,15 +101,16 @@ public class Stack<T> {
                     break;
                 }
                 node=node.below;
+            }
+            if(node==null){
+                throw new NoSuchElementException("Element specified doesn't exist");
             } 
         } catch (NullPointerException e) {
             throw e;
+        } catch (NoSuchElementException e) {
+            throw e;
         }
-        if(node==null){
-            return -1;
-        }else{
             return index;
-        }
     }
     
     public int size()throws Exception{
