@@ -8,7 +8,7 @@ package dataStructure;
  *  >void insertAtTail(T data) Inserts at tail
  *  >void delete(int index) deletes at index
  *  >T getNode(int index) returns data of node
- *  >Node getIndexOf(T data) returns node with data
+ *  >int getIndexOf(T data) returns index of node with data, if node doesnt exist returns -1
  *  >int size() returns size of Linked List
  * 
  * 
@@ -19,16 +19,12 @@ package dataStructure;
 
 public class LinkedList<T> {
     // Node class
-     class Node{
+    class Node{
         T data;
-        Node next;
+        Node next=null;
         public Node(T data){
             this.data=data;
             this.next=null;
-        }
-
-        public T get(){
-            return data;
         }
     }
 
@@ -182,7 +178,11 @@ public class LinkedList<T> {
         }catch(NullPointerException e){
             throw e;
         }
-        return index;
+        if(node==null){
+            return -1;
+        }else{
+            return index;
+        }
     }
 
     //returns size of linked list
