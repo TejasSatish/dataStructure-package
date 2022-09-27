@@ -22,11 +22,11 @@ public class LinkedList<T> {
      * 
      * @param data data of head node
      */
-    public LinkedList(T data){
-        head=new Node(data);
-        tail=head;
-        size++;
-    }
+    // public LinkedList(T data){
+    //     head=new Node(data);
+    //     tail=head;
+    //     size++;
+    // }
 
     /**
      * 
@@ -36,12 +36,13 @@ public class LinkedList<T> {
             Node new_node=new Node(data);
             if(head==null){
                 head=new_node;
+                tail=head;
             }else{
                 Node temp=head;
                 new_node.next=temp;
                 head=new_node;
-                size++;
             }
+            size++;
     }
     
     /**
