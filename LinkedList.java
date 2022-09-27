@@ -17,12 +17,14 @@ public class LinkedList<T> {
 
     private Node head=null;
     private int size;
+    private Node tail=null;
     /**
      * 
      * @param data data of head node
      */
     public LinkedList(T data){
         head=new Node(data);
+        tail=head;
         size++;
     }
 
@@ -32,10 +34,14 @@ public class LinkedList<T> {
      */
     public void insertAtHead(T data){
             Node new_node=new Node(data);
-            Node temp=head;
-            new_node.next=temp;
-            head=new_node;
-            size++;
+            if(head==null){
+                head=new_node;
+            }else{
+                Node temp=head;
+                new_node.next=temp;
+                head=new_node;
+                size++;
+            }
     }
     
     /**
@@ -84,11 +90,8 @@ public class LinkedList<T> {
       */
     public void insertAtTail(T data)throws Exception{
             Node new_node=new Node(data);
-            Node temp=head;            
-            while(temp.next!=null){
-                temp=temp.next;
-            }
-            temp.next=new_node;
+            tail.next=new_node;            
+            tail=tail.next;
             size++;
     }
     
