@@ -105,11 +105,15 @@ public class Stack<T> {
         }
             return index;
     }
-    
+    /**
+     * 
+     * @return integer size
+     * @throws NullPointerException if Underflows
+     */
     public int size()throws Exception{
         try{
             if(top==null){
-                throw new NullPointerException("No top found");
+                throw new NullPointerException("Underflows");
             }
         }catch(NullPointerException e){
             throw e;
