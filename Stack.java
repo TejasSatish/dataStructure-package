@@ -17,14 +17,7 @@ public class Stack<T> {
     }
     private Node top=null;
     private int size;
-    /**
-     * 
-     * @param data data of top node
-     */
-    public Stack(T data){
-        top=new Node(data);
-        size++;
-    }
+    
     /**
      * 
      * @param data data of node
