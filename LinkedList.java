@@ -214,4 +214,14 @@ public class LinkedList<T> {
         }
         return size;
     }
+
+    @Override
+    public String toString(){
+        String list= "";
+        Node temp=head;
+        while(temp!=null){
+            list+=temp.data+" ";
+        }
+        return list;
+    }
 }
