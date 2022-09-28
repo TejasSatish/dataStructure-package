@@ -69,8 +69,25 @@ public class BST<T extends Comparable<T>> {
      */
     public T min(){
         return minimum(root);
+    }
+    /**
+     * Prints the tree in inorder
+     */
+    public void preorder(){
+        preorderRecursive(root);
     }   
-    
+    /**
+     * Prints the tree in inorder
+     */
+    public void inorder(){
+        inorderRecursive(root);
+    }   
+    /**
+     * Prints the tree in postorder
+     */
+    public void postorder(){
+        postorderRecursive(root);
+    }   
     //  * how compareTo works
     //  * +ve - curr obj > spec obj
     //  *  -ve - curr obj <spec obj
@@ -117,6 +134,33 @@ public class BST<T extends Comparable<T>> {
             }
         }
         return root;
+    }
+
+    private void preorderRecursive(Node root){
+        if(root==null){
+        }else{
+            System.out.print(root.data+" ");
+            preorderRecursive(root.left);
+            preorderRecursive(root.right);
+        }
+    }
+
+    private void inorderRecursive(Node root){
+        if(root==null){
+        }else{
+            inorderRecursive(root.left);
+            System.out.print(root.data+" ");
+            inorderRecursive(root.right);
+        }
+    }
+
+    private void postorderRecursive(Node root){
+        if(root==null){
+        }else{
+            postorderRecursive(root.left);
+            postorderRecursive(root.right);
+            System.out.print(root.data+" ");
+        }
     }
 
     private T minimum(Node root){ //checks left subtree and returns min
