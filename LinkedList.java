@@ -29,7 +29,7 @@ public class LinkedList<T> {
     // }
 
     /**
-     * 
+     * Inserts node at beginning of list
      * @param data data of node
      */
     public void insertAtHead(T data){
@@ -46,10 +46,10 @@ public class LinkedList<T> {
     }
     
     /**
-     * 
-     * @param index index at which node is to ne inserted
+     * Inserts node at specified index in list
+     * @param index index at which node is to be inserted
      * @param data data of node
-     * @throws NullPointerException if head doesn't exist
+     * @throws NullPointerException if underflows
      * @throws ArrayIndexOutOfBoundsException if index doesn't exist
      */
     public void insertAtIndex(int index,T data)throws Exception{
@@ -86,20 +86,24 @@ public class LinkedList<T> {
         }
     }
      /**
-      * 
+      * Inserts node at the end of the list
       * @param data data of node
       */
     public void insertAtTail(T data)throws Exception{
+        if(head==null){
+            insertAtHead(data);
+        }else{
             Node new_node=new Node(data);
             tail.next=new_node;            
             tail=tail.next;
             size++;
+        }
     }
     
     /**
      * 
      * @param index index of node
-     * @throws NullPointerException if head doesn't exist
+     * @throws NullPointerException if underflows
      * @throws ArrayIndexOutOfBoundsException if index doesn't exist
      */
     public void delete(int index)throws Exception{
@@ -137,7 +141,7 @@ public class LinkedList<T> {
      * 
      * @param index index of node
      * @return data held by node
-     * @throws NullPointerException if head doesn't exist
+     * @throws NullPointerException if underflows
      * @throws ArrayIndexOutOfBoundsException if index doesn't exist
      */
     public T getNode(int index)throws Exception{
@@ -159,6 +163,36 @@ public class LinkedList<T> {
             throw e;
         }
         return node.data;
+    }
+
+    /**
+     * Checks whether node is present in list
+     * @param data
+     * @return boolean
+     * @throws NullPointerException if 
+     */
+
+    public boolean has(T data)throws Exception{
+        Node node=null;
+        try{
+            if(head==null){
+                throw new NullPointerException("Underflows");
+            }
+            node=head;
+            for(int i=0;i<size && node!=null;i++){
+                if(node.data==data){
+                    return true;
+                }
+                node=node.next;
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            throw e;
+        }catch(NullPointerException e){
+            throw e;
+        }catch(NoSuchElementException e){
+            throw e;
+        }
+            return false;
     }
 
     /**
@@ -213,6 +247,32 @@ public class LinkedList<T> {
             throw e;
         }
         return size;
+    }
+
+// will help DFS
+    public void join(LinkedList<T> list2)throws Exception{
+        if(list2.head==null){
+            return ;
+        }
+        Node node=list2.head;
+        while(node!=null){
+            insertAtTail(node.data);
+            node=node.next;
+        }
+    }
+
+    public LinkedList<T> slice(T data)throws Exception{
+        LinkedList<T> list=new LinkedList<T>();
+        Node node=head;
+        int i=0;
+        while(node!=null){
+            list.insertAtIndex(i, node.data);
+            if(node.data==data){
+                list.insertAtTail(node.data);
+                break;
+            }
+        }
+        return list;
     }
 
     @Override
