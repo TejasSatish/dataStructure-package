@@ -275,13 +275,32 @@ public class LinkedList<T> {
         return list;
     }
 
+    //This function does not work at all
+
     @Override
     public String toString(){
-        String list= "";
+        String list="";
         Node temp=head;
         while(temp!=null){
             list+=temp.data+" ";
         }
         return list;
+    }
+    
+    //reverses the list
+
+    public Node reverse(){
+        Node prev=null;
+        Node curr=head;
+        Node next=null;
+
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+        return head;
     }
 }
