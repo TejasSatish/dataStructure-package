@@ -137,6 +137,48 @@ public class LinkedList<T> {
             throw e;
         }
     }
+
+    /**
+     * 
+     * @param index index of node
+     * @throws NullPointerException if underflows
+     * @throws ArrayIndexOutOfBoundsException if index doesn't exist
+     * @throws NoSuchElementException
+     */
+    public void deleteNode(T data)throws Exception{
+        try{
+            if(head==null){
+                throw new NullPointerException("Underflows");
+            }
+            if(has(data)){
+                throw new NoSuchElementException("Element doesn't exist");
+            }
+            int index=this.getIndexOf(data);
+            Node temp=head;
+            Node prev=head;
+            Node next=temp.next;
+            if(index==0){
+                temp=null;
+                prev=null;
+                head=next;
+                size--;
+            }else{
+                for(int i=0;i<index && temp.next!=null;i++){
+                    prev=temp;
+                    temp=temp.next;
+                    next=temp.next;
+                }
+                prev.next=next;
+                size--;
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            throw e;
+        }catch(NullPointerException e){
+            throw e;
+        }
+    }
+
+
     /**
      * 
      * @param index index of node
@@ -216,7 +258,7 @@ public class LinkedList<T> {
             node=head;
             for(index=0;index<size;index++){
                 if(node.data==data){
-                    break;
+                    return index;
                 }
                 node=node.next;
             }
@@ -230,7 +272,7 @@ public class LinkedList<T> {
         }catch(NoSuchElementException e){
             throw e;
         }
-            return index;
+        return index;
     }
 
     /**
@@ -249,28 +291,30 @@ public class LinkedList<T> {
         return size;
     }
 
-// will help DFS
-    public void join(LinkedList<T> list2)throws Exception{
+// will hellp DFS
+    public LinkedList<T> join(LinkedList<T> list2)throws Exception{
         if(list2.head==null){
-            return ;
+            returns();
         }
         Node node=list2.head;
         while(node!=null){
             insertAtTail(node.data);
             node=node.next;
         }
+        return returns();
     }
-
-    public LinkedList<T> slice(T data)throws Exception{
+    /**
+     * Used to return a linked list
+     * Coupled with join method to return joined list
+     * @return LinkedList<T>
+     * @throws Exception
+     */
+    public LinkedList<T> returns()throws Exception{
         LinkedList<T> list=new LinkedList<T>();
         Node node=head;
         int i=0;
         while(node!=null){
             list.insertAtIndex(i, node.data);
-            if(node.data==data){
-                list.insertAtTail(node.data);
-                break;
-            }
         }
         return list;
     }
@@ -288,19 +332,31 @@ public class LinkedList<T> {
     }
     
     //reverses the list
-
-    public Node reverse(){
+    /**
+     *  Revereses the list
+     * @return void
+     */
+    public void reverse(){
         Node prev=null;
         Node curr=head;
         Node next=null;
 
-        while(curr!=null){
-            next=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=next;
+        try{
+            if(head==null){
+                throw new NullPointerException("List is empty");
+            }
+            while(curr!=null){
+                next=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+            }
+            head=prev;
+        }catch(ArrayIndexOutOfBoundsException e){
+            throw e;
+        }catch(NullPointerException e){
+            throw e;
         }
-        head=prev;
-        return head;
+        
     }
 }

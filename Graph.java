@@ -83,19 +83,27 @@ public class Graph<T> {
         }
     }
     //learn how an adjacency list works
-    //need to compare existing paths to find MST
-    public LinkedList<T> findPath(T src, T dest)throws Exception{
+    public LinkedList<T> DFS(T src)throws Exception{
         LinkedList<T> path= new LinkedList<T>();
-        LinkedList<T> srcList=adjacencyList.get(src);
-        int index=0;
-        if(srcList.has(dest)){
-            LinkedList<T> sliced=srcList.slice(dest);
-            path.join(sliced);
-            return path;
-        }else{
-            findPath(srcList.getNode(index++), dest);
-        }
+        
+        LinkedList<T> orderVisited= new LinkedList<T>(); //order of visited nodes
+        orderVisited.insertAtTail(src);
+        path=DFSR(src,orderVisited);
+
         return path;
+    }
+
+    public LinkedList<T> DFSR(T src, LinkedList<T> visited)throws Exception{
+
+        LinkedList<T> srcList = adjacencyList.get(src); //adjacent nodes of the src node
+        // int i=0;
+        while(srcList.size()>0 && visited.has(srcList.getNode(0)) ){
+            srcList.deleteNode(visited.getNode(0));   /// getting error in delete as node is null
+            // continue after 
+        }
+        visited.insertAtTail(srcList.getNode(0));  //adds current node to list of visited
+        
+        return visited.join(DFSR(src,visited));
     }
 
     
